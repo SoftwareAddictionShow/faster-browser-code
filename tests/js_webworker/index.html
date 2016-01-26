@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>JavaScript - WebWorker</title>
+	</head>
+	<body>
+		<h1>JavaScript - WebWorker</h1>
+
+		<div id="fibonacci"></div>
+		<div id="time"></div>
+
+		<button id="start">Start</button>
+	</body>
+	<script>
+	document.querySelector('#start').addEventListener('click', function() {
+		document.querySelector('#fibonacci').innerHTML = "Wiating ...";
+		document.querySelector('#time').innerHTML = "Wiating ...";
+
+		var worker = new Worker('worker.js');
+		worker.onmessage = function(e) {
+			switch (e.data.action) {
+				case 'end':
+					var start_time = e.data.start_time;
+					var result = e.data.result;
+					var end_time = e.data.end_time;
+
+					document.querySelector('#fibonacci').innerHTML = "fib(43): " + result;
+					document.querySelector('#time').innerHTML = "Time: " + (end_time - start_time) + "ms";
+					break;
+			}
+		};
+
+		var message = {
+			action: 'start'
+		};
+		worker.postMessage(message);
+	}, false);
+	</script>
+</html>
