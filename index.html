@@ -3,21 +3,31 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>Faster Browser Code</title>
+		<link type="text/css" href="styles.css" media="screen" rel="Stylesheet" />
 		<script type="text/javascript" src="tests/js_pure/benchmark.js"></script>
 		<script type="text/javascript" src="tests/js_webworker/benchmark.js"></script>
 	</head>
 	<body>
+		<span id="forkongithub">
+			<a href="https://github.com/SoftwareAddictionShow/faster-browser-code">Fork me on GitHub</a>
+		</span>
+
 		<h1>Faster Browser Code</h1>
 
-		<h2>Benchmarks:</h2>
-
 		<p>
-			<button id="start">Start</button>
+			This application benchmarks different web technologies. The goal
+			is to see which is faster than vanilla JavaScript. The function
+			fibonacci(43) is run in each benchmark.
+		</p>
+
+		<h2>Benchmarks:</h2>
+		<p>
+			<button id="start">Start Benchmarks</button>
 		</p>
 
 		<ul>
-			<li><a href="tests/js_pure">JavaScript - Pure</a> <span id="time_js_pure"></span></li>
-			<li><a href="tests/js_webworker">JavaScript - WebWorker</a> <span id="time_js_webworker"></span></li>
+			<li>JavaScript - Pure: <span id="time_js_pure"></span></li>
+			<li>JavaScript - WebWorker: <span id="time_js_webworker"></span></li>
 		</ul>
 
 		<h2>TODO:</h2>
