@@ -1,7 +1,7 @@
 
 
 
-function benchmarkJSWebWorker(cb) {
+function benchmarkJSWebWorkerUseStrict(cb) {
 	var currentScriptPath = function() {
 		// NOTE: document.currentScript does not work in a Web Worker
 		// So we have to parse a stack trace maually
@@ -23,7 +23,7 @@ function benchmarkJSWebWorker(cb) {
 		}
 	};
 
-	console.info('benchmarkJSWebWorker');
+	console.info('benchmarkJSWebWorkerUseStrict');
 	var path = currentScriptPath() + 'worker.js';
 	console.info(path);
 	var worker = new Worker(path);

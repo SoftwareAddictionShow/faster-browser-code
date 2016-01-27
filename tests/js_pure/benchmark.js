@@ -1,13 +1,15 @@
 
 
-function fibonacci(n) {
-	if (n < 2) {
-		return n;
-	}
-	return fibonacci(n - 2) + fibonacci(n - 1);
-}
+
 
 function benchmarkJSPure(cb) {
+	var fibonacci = function(n) {
+		if (n < 2) {
+			return n;
+		}
+		return fibonacci(n - 2) + fibonacci(n - 1);
+	};
+
 	var start_time = new Date().getTime();
 	var result = fibonacci(43);
 	var end_time = new Date().getTime();
