@@ -7,6 +7,9 @@
 		<script type="text/javascript" src="tests/js_pure/benchmark.js"></script>
 		<script type="text/javascript" src="tests/js_webworker/benchmark.js"></script>
 		<script type="text/javascript" src="tests/js_webworker_use_strict/benchmark.js"></script>
+		<script type="text/javascript" src="tests/js_webworker_or_integers/benchmark.js"></script>
+		<script type="text/javascript" src="tests/emscripten_c/benchmark.js"></script>
+		<script type="text/javascript" src="tests/emscripten_c_o3/benchmark.js"></script>
 	</head>
 	<body>
 		<span id="forkongithub">
@@ -30,13 +33,17 @@
 			<li>JavaScript - Pure: <span id="time_js_pure"></span></li>
 			<li>JavaScript - WebWorker: <span id="time_js_webworker"></span></li>
 			<li>JavaScript - WebWorker Use Strict: <span id="time_js_webworker_use_strict"></span></li>
+			<li>JavaScript - WebWorker Or Integers: <span id="time_js_webworker_or_integers"></span></li>
+			<li>Emscripten - C: <span id="time_emscripten_c"></span></li>
+			<li>Emscripten - C with -O3: <span id="time_emscripten_c_o3"></span></li>
 		</ul>
 
 		<h2>TODO:</h2>
 		<ul>
+			<li>Emscripten - C with Closure Compiler</li>
+			<li>Emscripten - C++</li>
 			<li>JavaScript - SIMD</li>
 			<li>ASM.js</li>
-			<li>Emscripten - C++</li>
 			<li>Duetto</li>
 			<li>WebAssembly - C++</li>
 			<li>Dart</li>
@@ -54,7 +61,10 @@
 	var g_benchmarks = [
 		{'time_js_pure' : benchmarkJSPure},
 		{'time_js_webworker' : benchmarkJSWebWorker},
-		{'time_js_webworker_use_strict' : benchmarkJSWebWorkerUseStrict}
+		{'time_js_webworker_use_strict' : benchmarkJSWebWorkerUseStrict},
+		{'time_js_webworker_or_integers' : benchmarkJSWebWorkerUseOrIntegers},
+		{'time_emscripten_c' : benchmarkEmscriptenC},
+		{'time_emscripten_c_o3' : benchmarkEmscriptenCO3}
 	];
 
 	function startBenchmarks() {
