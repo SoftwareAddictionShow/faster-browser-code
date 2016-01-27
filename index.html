@@ -60,6 +60,7 @@
 	function startBenchmarks() {
 		var nextBenchmark = function(i) {
 			if (i >= g_benchmarks.length) {
+				document.querySelector('#start').style.display = '';
 				return;
 			}
 
@@ -79,6 +80,7 @@
 	}
 
 	document.querySelector('#start').addEventListener('click', function() {
+		document.querySelector('#start').style.display = 'none';
 		startBenchmarks();
 	}, false);
 	</script>
