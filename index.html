@@ -3,6 +3,8 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>Faster Browser Code</title>
+		<script type="text/javascript" src="tests/js_pure/benchmark.js"></script>
+		<script type="text/javascript" src="tests/js_webworker/benchmark.js"></script>
 	</head>
 	<body>
 		<h1>Faster Browser Code</h1>
@@ -37,42 +39,6 @@
 		</ul>
 	</body>
 	<script>
-	function fibonacci(n) {
-		if (n < 2) {
-			return n;
-		}
-		return fibonacci(n - 2) + fibonacci(n - 1);
-	}
-
-	function benchmarkJSPure(cb) {
-		var start_time = new Date().getTime();
-		var result = fibonacci(43);
-		var end_time = new Date().getTime();
-		var diff_time = end_time - start_time;
-		cb(diff_time, result);
-	}
-
-	function benchmarkJSWebWorker(cb) {
-		var worker = new Worker('worker.js');
-		worker.onmessage = function(e) {
-			switch (e.data.action) {
-				case 'end':
-					var start_time = e.data.start_time;
-					var result = e.data.result;
-					var end_time = e.data.end_time;
-					var diff_time = end_time - start_time;
-					cb(diff_time, result);
-					worker.terminate();
-					break;
-			}
-		};
-
-		var message = {
-			action: 'start'
-		};
-		worker.postMessage(message);
-	}
-
 	var g_benchmarks = [
 		{'time_js_pure' : benchmarkJSPure},
 		{'time_js_webworker' : benchmarkJSWebWorker}
