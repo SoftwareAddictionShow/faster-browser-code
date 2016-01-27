@@ -29,6 +29,17 @@
 			fibonacci(43) is run in each benchmark.
 		</p>
 
+		<p>
+			FIXME: Get rid of the pure JS test. Just use a WebWorker as the
+			pure JS test. Everything, including emscripten should use a worker,
+			so it does not block the browser.
+		</p>
+
+		<p>
+			FIXME: When you click the button, it is not obvious what is happening. Add a spinner
+			in its place.
+		</p>
+
 		<h2>Benchmarks:</h2>
 		<p>
 			<button id="start">Start Benchmarks</button>
@@ -91,6 +102,8 @@
 			<li>GLSL</li>
 			<li>C# - JSIL</li>
 			<li>Go - gopherjs</li>
+			<li>OpenCL</li>
+			<li>WebCL</li>
 		</ul>
 	</body>
 	<script>
