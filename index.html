@@ -3,18 +3,21 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>Faster Browser Code</title>
+		<script type="text/javascript" src="tests/js_pure/benchmark.js"></script>
+		<script type="text/javascript" src="tests/js_webworker/benchmark.js"></script>
 	</head>
 	<body>
 		<h1>Faster Browser Code</h1>
 
+		<h2>Benchmarks:</h2>
+
 		<p>
-			FIXME: Move all the tests to run from this page.
+			<button id="start">Start</button>
 		</p>
 
-		<h2>Benchmarks:</h2>
 		<ul>
-			<li><a href="tests/js_pure">JavaScript - Pure</a></li>
-			<li><a href="tests/js_webworker">JavaScript - WebWorker</a></li>
+			<li><a href="tests/js_pure">JavaScript - Pure</a> <span id="time_js_pure"></span></li>
+			<li><a href="tests/js_webworker">JavaScript - WebWorker</a> <span id="time_js_webworker"></span></li>
 		</ul>
 
 		<h2>TODO:</h2>
@@ -35,4 +38,35 @@
 			<li>Go - gopherjs</li>
 		</ul>
 	</body>
+	<script>
+	var g_benchmarks = [
+		{'time_js_pure' : benchmarkJSPure},
+		{'time_js_webworker' : benchmarkJSWebWorker}
+	];
+
+	function startBenchmarks() {
+		var nextBenchmark = function(i) {
+			if (i >= g_benchmarks.length) {
+				return;
+			}
+
+			var bench_element = Object.keys(g_benchmarks[i])[0];
+			var bench_cb = g_benchmarks[i][bench_element];
+			var time_span = document.querySelector('#' + bench_element);
+			time_span.innerHTML = 'Running ...';
+
+			setTimeout(function() {
+				bench_cb(function(diff_time, result) {
+					time_span.innerHTML = diff_time + 'ms';
+					nextBenchmark(i + 1);
+				});
+			}, 100);
+		};
+		nextBenchmark(0);
+	}
+
+	document.querySelector('#start').addEventListener('click', function() {
+		startBenchmarks();
+	}, false);
+	</script>
 </html>
