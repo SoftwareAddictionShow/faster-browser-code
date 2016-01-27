@@ -6,6 +6,7 @@
 		<link type="text/css" href="styles.css" media="screen" rel="Stylesheet" />
 		<script type="text/javascript" src="tests/js_pure/benchmark.js"></script>
 		<script type="text/javascript" src="tests/js_webworker/benchmark.js"></script>
+		<script type="text/javascript" src="tests/js_webworker_use_strict/benchmark.js"></script>
 	</head>
 	<body>
 		<span id="forkongithub">
@@ -28,6 +29,7 @@
 		<ul>
 			<li>JavaScript - Pure: <span id="time_js_pure"></span></li>
 			<li>JavaScript - WebWorker: <span id="time_js_webworker"></span></li>
+			<li>JavaScript - WebWorker Use Strict: <span id="time_js_webworker_use_strict"></span></li>
 		</ul>
 
 		<h2>TODO:</h2>
@@ -51,7 +53,8 @@
 	<script>
 	var g_benchmarks = [
 		{'time_js_pure' : benchmarkJSPure},
-		{'time_js_webworker' : benchmarkJSWebWorker}
+		{'time_js_webworker' : benchmarkJSWebWorker},
+		{'time_js_webworker_use_strict' : benchmarkJSWebWorkerUseStrict}
 	];
 
 	function startBenchmarks() {
