@@ -1,4 +1,10 @@
 
+body {
+    margin-right: 100px;
+    margin-left: 100px;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
 /* Ribbon from:
 https://codepo8.github.io/css-fork-on-github-ribbon/
 */
