@@ -72,6 +72,12 @@
 				<td class="result_time"><span id="time_emscripten_c_o3"></span></td>
 				<td class="result_time" id="diff_emscripten_c_o3"></td>
 			</tr>
+			<tr>
+				<td>WebGL - GLSL</td>
+				<td>GLGL running on the GPU via WebGL (OpenGL)</td>
+				<td class="result_time"><span id="time_webgl_glsl"></span></td>
+				<td class="result_time" id="diff_webgl_glsl"></td>
+			</tr>
 		</table>
 
 		<h2>TODO:</h2>
@@ -88,7 +94,6 @@
 			<li>Nacl</li>
 			<li>Pnacl</li>
 			<li>Hax</li>
-			<li>GLSL</li>
 			<li>C# - JSIL</li>
 			<li>Go - gopherjs</li>
 			<li>OpenCL</li>
@@ -97,13 +102,12 @@
 	</body>
 	<script>
 	var g_benchmarks = [
-
 		{'js_pure' : benchmarkJSWebWorker},
 		{'js_use_strict' : benchmarkJSWebWorkerUseStrict},
 		{'js_bitwise_or_integers' : benchmarkJSWebWorkerUseOrIntegers},
 		{'emscripten_c' : benchmarkEmscriptenC},
-		{'emscripten_c_o3' : benchmarkEmscriptenCO3}
-		//{'webgl_glsl', benchmarkWebGlGLSL}
+		{'emscripten_c_o3' : benchmarkEmscriptenCO3},
+		{'webgl_glsl' : benchmarkWebGlGLSL}
 	];
 
 	function withPositiveOrNegative(new_time, base_score) {
