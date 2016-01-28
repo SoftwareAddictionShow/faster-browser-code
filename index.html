@@ -23,14 +23,10 @@
 			fibonacci(43) is run in each benchmark.
 		</p>
 
-		<p>
-			FIXME: When you click the button, it is not obvious what is happening. Add a spinner
-			in its place.
-		</p>
-
 		<h2>Benchmarks:</h2>
 		<p>
 			<button id="start">Start Benchmarks</button>
+			<span id="waiting" style="display: none;" class="running">Running benchmarks ...</span>
 		</p>
 
 		<table>
@@ -124,6 +120,7 @@
 		var nextBenchmark = function(i) {
 			if (i >= g_benchmarks.length) {
 				document.querySelector('#start').style.display = '';
+				document.querySelector('#waiting').style.display = 'none';
 				return;
 			}
 
@@ -131,6 +128,7 @@
 			var bench_cb = g_benchmarks[i][bench_element];
 			var time_span = document.querySelector('#time_' + bench_element);
 			var diff_span = document.querySelector('#diff_' + bench_element);
+			time_span.classList.add('running');
 			time_span.innerHTML = 'Running ...';
 			diff_span.innerHTML = '';
 
@@ -139,6 +137,7 @@
 					if (i === 0) {
 						base_score = diff_time;
 					}
+					time_span.classList.remove('running');
 					time_span.innerHTML = diff_time;
 					diff_span.innerHTML = withPositiveOrNegative(diff_time, base_score);
 					nextBenchmark(i + 1);
@@ -150,6 +149,7 @@
 
 	document.querySelector('#start').addEventListener('click', function() {
 		document.querySelector('#start').style.display = 'none';
+		document.querySelector('#waiting').style.display = '';
 		startBenchmarks();
 	}, false);
 	</script>
