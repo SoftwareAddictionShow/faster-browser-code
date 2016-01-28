@@ -4,7 +4,6 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>Faster Browser Code</title>
 		<link type="text/css" href="styles.css" media="screen" rel="Stylesheet" />
-		<script type="text/javascript" src="tests/js_pure/benchmark.js"></script>
 		<script type="text/javascript" src="tests/js_webworker/benchmark.js"></script>
 		<script type="text/javascript" src="tests/js_webworker_use_strict/benchmark.js"></script>
 		<script type="text/javascript" src="tests/js_webworker_or_integers/benchmark.js"></script>
@@ -30,12 +29,6 @@
 		</p>
 
 		<p>
-			FIXME: Get rid of the pure JS test. Just use a WebWorker as the
-			pure JS test. Everything, including emscripten should use a worker,
-			so it does not block the browser.
-		</p>
-
-		<p>
 			FIXME: When you click the button, it is not obvious what is happening. Add a spinner
 			in its place.
 		</p>
@@ -50,11 +43,6 @@
 				<th>Technology</th>
 				<th>Description</th>
 				<th>Time</th>
-			</tr>
-			<tr>
-				<td>JavaScript - Pure</td>
-				<td>JavaScript running directly in the window.</td>
-				<td><span id="time_js_pure"></span></td>
 			</tr>
 			<tr>
 				<td>JavaScript - WebWorker</td>
@@ -108,7 +96,6 @@
 	</body>
 	<script>
 	var g_benchmarks = [
-		{'time_js_pure' : benchmarkJSPure},
 		{'time_js_webworker' : benchmarkJSWebWorker},
 		{'time_js_webworker_use_strict' : benchmarkJSWebWorkerUseStrict},
 		{'time_js_webworker_or_integers' : benchmarkJSWebWorkerUseOrIntegers},
