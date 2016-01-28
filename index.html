@@ -37,17 +37,20 @@
 			<tr>
 				<th>Technology</th>
 				<th>Description</th>
-				<th>Time</th>
+				<th>Fib(43) in ms</th>
+				<th>Score</th>
 			</tr>
 			<tr>
 				<td>JavaScript</td>
 				<td>Simple JavaScript function.</td>
-				<td><span id="time_js_pure"></span></td>
+				<td class="result_time"><span id="time_js_pure"></span></td>
+				<td class="result_time" id="diff_js_pure"></td>
 			</tr>
 			<tr>
 				<td>JavaScript - "use strict"</td>
 				<td>JavaScript function with the "use strict" directive.</td>
-				<td><span id="time_js_use_strict"></span></td>
+				<td class="result_time"><span id="time_js_use_strict"></span></td>
+				<td class="result_time" id="diff_js_use_strict"></td>
 			</tr>
 			<tr>
 				<td>JavaScript - "bitwise or" on variables</td>
@@ -57,17 +60,20 @@
 					browser known it can treat all the floats as integers (Even
 					though JavaScript does not support integers).
 				</td>
-				<td><span id="time_js_bitwise_or_integers"></span></td>
+				<td class="result_time"><span id="time_js_bitwise_or_integers"></span></td>
+				<td class="result_time" id="diff_js_bitwise_or_integers"></td>
 			</tr>
 			<tr>
 				<td>Emscripten - C</td>
 				<td>C compiled with Emscripten on default settings.</td>
-				<td><span id="time_emscripten_c"></span></td>
+				<td class="result_time"><span id="time_emscripten_c"></span></td>
+				<td class="result_time" id="diff_emscripten_c"></td>
 			</tr>
 			<tr>
 				<td>Emscripten - C with -O3</td>
 				<td>C compiled with Emscripten on optimized(-O3) settings.</td>
-				<td><span id="time_emscripten_c_o3"></span></td>
+				<td class="result_time"><span id="time_emscripten_c_o3"></span></td>
+				<td class="result_time" id="diff_emscripten_c_o3"></td>
 			</tr>
 		</table>
 
@@ -94,14 +100,27 @@
 	</body>
 	<script>
 	var g_benchmarks = [
-		{'time_js_pure' : benchmarkJSWebWorker},
-		{'time_js_use_strict' : benchmarkJSWebWorkerUseStrict},
-		{'time_js_bitwise_or_integers' : benchmarkJSWebWorkerUseOrIntegers},
-		{'time_emscripten_c' : benchmarkEmscriptenC},
-		{'time_emscripten_c_o3' : benchmarkEmscriptenCO3}
+		{'js_pure' : benchmarkJSWebWorker},
+		{'js_use_strict' : benchmarkJSWebWorkerUseStrict},
+		{'js_bitwise_or_integers' : benchmarkJSWebWorkerUseOrIntegers},
+		{'emscripten_c' : benchmarkEmscriptenC},
+		{'emscripten_c_o3' : benchmarkEmscriptenCO3}
 	];
 
+	function withPositiveOrNegative(new_time, base_score) {
+		var new_time = new_time - base_score;
+		var prefix = '';
+		if (new_time > 0) {
+			prefix = '+'
+		} else if (new_time < 0) {
+			prefix = '-';
+		}
+		return prefix + ((Math.abs(new_time) / Math.abs(base_score)) * 100).toFixed(2) + '%';
+	}
+
 	function startBenchmarks() {
+		var base_score = 0;
+
 		var nextBenchmark = function(i) {
 			if (i >= g_benchmarks.length) {
 				document.querySelector('#start').style.display = '';
@@ -110,12 +129,18 @@
 
 			var bench_element = Object.keys(g_benchmarks[i])[0];
 			var bench_cb = g_benchmarks[i][bench_element];
-			var time_span = document.querySelector('#' + bench_element);
+			var time_span = document.querySelector('#time_' + bench_element);
+			var diff_span = document.querySelector('#diff_' + bench_element);
 			time_span.innerHTML = 'Running ...';
+			diff_span.innerHTML = '';
 
 			setTimeout(function() {
 				bench_cb(function(diff_time, result) {
-					time_span.innerHTML = diff_time + 'ms';
+					if (i === 0) {
+						base_score = diff_time;
+					}
+					time_span.innerHTML = diff_time;
+					diff_span.innerHTML = withPositiveOrNegative(diff_time, base_score);
 					nextBenchmark(i + 1);
 				});
 			}, 100);
