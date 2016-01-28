@@ -37,17 +37,17 @@
 			<tr>
 				<th>Technology</th>
 				<th>Description</th>
-				<th>Time</th>
+				<th>Fib(43) in ms</th>
 			</tr>
 			<tr>
 				<td>JavaScript</td>
 				<td>Simple JavaScript function.</td>
-				<td><span id="time_js_pure"></span></td>
+				<td class="result_time"><span id="time_js_pure"></span></td>
 			</tr>
 			<tr>
 				<td>JavaScript - "use strict"</td>
 				<td>JavaScript function with the "use strict" directive.</td>
-				<td><span id="time_js_use_strict"></span></td>
+				<td class="result_time"><span id="time_js_use_strict"></span></td>
 			</tr>
 			<tr>
 				<td>JavaScript - "bitwise or" on variables</td>
@@ -57,17 +57,17 @@
 					browser known it can treat all the floats as integers (Even
 					though JavaScript does not support integers).
 				</td>
-				<td><span id="time_js_bitwise_or_integers"></span></td>
+				<td class="result_time"><span id="time_js_bitwise_or_integers"></span></td>
 			</tr>
 			<tr>
 				<td>Emscripten - C</td>
 				<td>C compiled with Emscripten on default settings.</td>
-				<td><span id="time_emscripten_c"></span></td>
+				<td class="result_time"><span id="time_emscripten_c"></span></td>
 			</tr>
 			<tr>
 				<td>Emscripten - C with -O3</td>
 				<td>C compiled with Emscripten on optimized(-O3) settings.</td>
-				<td><span id="time_emscripten_c_o3"></span></td>
+				<td class="result_time"><span id="time_emscripten_c_o3"></span></td>
 			</tr>
 		</table>
 
@@ -115,7 +115,7 @@
 
 			setTimeout(function() {
 				bench_cb(function(diff_time, result) {
-					time_span.innerHTML = diff_time + 'ms';
+					time_span.innerHTML = diff_time;
 					nextBenchmark(i + 1);
 				});
 			}, 100);

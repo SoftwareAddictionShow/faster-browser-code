@@ -9,8 +9,18 @@ table, th, td {
     border: 1px solid black;
 }
 
+th {
+    white-space: nowrap;
+}
+
 td, th {
     padding: 5px;
+}
+
+.result_time {
+    font-family: monospace;
+    text-align: right;
+    white-space: nowrap;
 }
 
 /* Ribbon from:
