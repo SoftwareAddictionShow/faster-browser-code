@@ -10,6 +10,11 @@
 		<script type="text/javascript" src="tests/js_webworker_or_integers/benchmark.js"></script>
 		<script type="text/javascript" src="tests/emscripten_c/benchmark.js"></script>
 		<script type="text/javascript" src="tests/emscripten_c_o3/benchmark.js"></script>
+		<style>
+		table, th, td {
+		   border: 1px solid black;
+		}
+		</style>
 	</head>
 	<body>
 		<span id="forkongithub">
@@ -24,19 +29,61 @@
 			fibonacci(43) is run in each benchmark.
 		</p>
 
+		<p>
+			FIXME: Get rid of the pure JS test. Just use a WebWorker as the
+			pure JS test. Everything, including emscripten should use a worker,
+			so it does not block the browser.
+		</p>
+
+		<p>
+			FIXME: When you click the button, it is not obvious what is happening. Add a spinner
+			in its place.
+		</p>
+
 		<h2>Benchmarks:</h2>
 		<p>
 			<button id="start">Start Benchmarks</button>
 		</p>
 
-		<ul>
-			<li>JavaScript - Pure: <span id="time_js_pure"></span></li>
-			<li>JavaScript - WebWorker: <span id="time_js_webworker"></span></li>
-			<li>JavaScript - WebWorker Use Strict: <span id="time_js_webworker_use_strict"></span></li>
-			<li>JavaScript - WebWorker Or Integers: <span id="time_js_webworker_or_integers"></span></li>
-			<li>Emscripten - C: <span id="time_emscripten_c"></span></li>
-			<li>Emscripten - C with -O3: <span id="time_emscripten_c_o3"></span></li>
-		</ul>
+		<table>
+			<tr>
+				<th>Technology</th>
+				<th>Description</th>
+				<th>Time</th>
+			</tr>
+			<tr>
+				<td>JavaScript - Pure</td>
+				<td>JavaScript running directly in the window.</td>
+				<td><span id="time_js_pure"></span></td>
+			</tr>
+			<tr>
+				<td>JavaScript - WebWorker</td>
+				<td>JavaScript running in a WebWorker.</td>
+				<td><span id="time_js_webworker"></span></td>
+			</tr>
+			<tr>
+				<td>JavaScript - WebWorker Use Strict</td>
+				<td>JavaScript using the "use strict" directive.</td>
+				<td><span id="time_js_webworker_use_strict"></span></td>
+			</tr>
+			<tr>
+				<td>JavaScript - WebWorker Or Integers</td>
+				<td>JavaScript using bit manipulation ( 3 | 0) to let the
+					browser know the variable will be used as an integer
+					instead of a float.</td>
+				<td><span id="time_js_webworker_or_integers"></span></td>
+			</tr>
+			<tr>
+				<td>Emscripten - C</td>
+				<td>C compiled with Emscripten on default settings.</td>
+				<td><span id="time_emscripten_c"></span></td>
+			</tr>
+			<tr>
+				<td>Emscripten - C with -O3</td>
+				<td>C compiled with Emscripten on optimized(-O3) settings.</td>
+				<td><span id="time_emscripten_c_o3"></span></td>
+			</tr>
+		</table>
 
 		<h2>TODO:</h2>
 		<ul>
@@ -55,6 +102,8 @@
 			<li>GLSL</li>
 			<li>C# - JSIL</li>
 			<li>Go - gopherjs</li>
+			<li>OpenCL</li>
+			<li>WebCL</li>
 		</ul>
 	</body>
 	<script>
