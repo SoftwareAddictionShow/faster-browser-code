@@ -9,6 +9,7 @@
 		<script type="text/javascript" src="tests/js_bitwise_or_integers/benchmark.js"></script>
 		<script type="text/javascript" src="tests/emscripten_c/benchmark.js"></script>
 		<script type="text/javascript" src="tests/emscripten_c_o3/benchmark.js"></script>
+		<script type="text/javascript" src="tests/webgl_glsl/benchmark.js"></script>
 	</head>
 	<body>
 		<span id="forkongithub">
@@ -71,6 +72,12 @@
 				<td class="result_time"><span id="time_emscripten_c_o3"></span></td>
 				<td class="result_time" id="diff_emscripten_c_o3"></td>
 			</tr>
+			<tr>
+				<td>WebGL - GLSL</td>
+				<td>GLGL running on the GPU via WebGL (OpenGL)</td>
+				<td class="result_time"><span id="time_webgl_glsl"></span></td>
+				<td class="result_time" id="diff_webgl_glsl"></td>
+			</tr>
 		</table>
 
 		<h2>TODO:</h2>
@@ -87,7 +94,6 @@
 			<li>Nacl</li>
 			<li>Pnacl</li>
 			<li>Hax</li>
-			<li>GLSL</li>
 			<li>C# - JSIL</li>
 			<li>Go - gopherjs</li>
 			<li>OpenCL</li>
@@ -100,7 +106,8 @@
 		{'js_use_strict' : benchmarkJSWebWorkerUseStrict},
 		{'js_bitwise_or_integers' : benchmarkJSWebWorkerUseOrIntegers},
 		{'emscripten_c' : benchmarkEmscriptenC},
-		{'emscripten_c_o3' : benchmarkEmscriptenCO3}
+		{'emscripten_c_o3' : benchmarkEmscriptenCO3},
+		{'webgl_glsl' : benchmarkWebGlGLSL}
 	];
 
 	function withPositiveOrNegative(new_time, base_score) {
