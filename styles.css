@@ -23,6 +23,11 @@ td, th {
     white-space: nowrap;
 }
 
+.running {
+    background-color: red;
+    font-weight: bold;
+}
+
 /* Ribbon from:
 https://codepo8.github.io/css-fork-on-github-ribbon/
 */
