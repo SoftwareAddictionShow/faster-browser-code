@@ -135,7 +135,6 @@
 		console.info(worker_path);
 		var worker = new Worker(worker_path);
 		worker.onmessage = function(e) {
-			console.info(e.data);
 			switch (e.data.action) {
 				case 'end':
 					var start_time = e.data.start_time;
@@ -151,7 +150,6 @@
 		var message = {
 			action: 'start'
 		};
-		console.info(message);
 		worker.postMessage(message);
 	}
 
