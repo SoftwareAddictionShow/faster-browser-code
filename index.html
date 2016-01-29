@@ -10,6 +10,7 @@
 		<script type="text/javascript" src="tests/emscripten_c/benchmark.js"></script>
 		<script type="text/javascript" src="tests/emscripten_c_o3/benchmark.js"></script>
 		<script type="text/javascript" src="tests/webgl_glsl/benchmark.js"></script>
+		<script type="text/javascript" src="tests/cheerp_cpp/benchmark.js"></script>
 	</head>
 	<body>
 		<span id="forkongithub">
@@ -78,24 +79,37 @@
 				<td class="result_time"><span id="time_webgl_glsl"></span></td>
 				<td class="result_time" id="diff_webgl_glsl"></td>
 			</tr>
+			<tr>
+				<td>Cheerp - C++</td>
+				<td>C++ compiled with Cheerp on optimized(-O3) settings.</td>
+				<td class="result_time"><span id="time_cheerp_cpp"></span></td>
+				<td class="result_time" id="diff_cheerp_cpp"></td>
+			</tr>
 		</table>
 
 		<h2>TODO:</h2>
 		<ul>
 			<li>Emscripten - C with Closure Compiler</li>
 			<li>Emscripten - C++</li>
-			<li>JavaScript - SIMD</li>
 			<li>ASM.js</li>
-			<li>Duetto</li>
-			<li>WebAssembly - C++</li>
-			<li>Dart</li>
 			<li>TypeScript</li>
 			<li>CoffeeScript</li>
-			<li>Nacl</li>
-			<li>Pnacl</li>
 			<li>Hax</li>
 			<li>C# - JSIL</li>
 			<li>Go - gopherjs</li>
+		</ul>
+
+		<h2>TODO Browser Dependent:</h2>
+		<ul>
+			<li>Dart</li>
+			<li>Nacl</li>
+			<li>Pnacl</li>
+		</ul>
+
+		<h2>TODO Future:</h2>
+		<ul>
+			<li>WebAssembly - C++</li>
+			<li>JavaScript - SIMD</li>
 			<li>OpenCL</li>
 			<li>WebCL</li>
 		</ul>
@@ -107,7 +121,8 @@
 		{'js_bitwise_or_integers' : benchmarkJSWebWorkerUseOrIntegers},
 		{'emscripten_c' : benchmarkEmscriptenC},
 		{'emscripten_c_o3' : benchmarkEmscriptenCO3},
-		{'webgl_glsl' : benchmarkWebGlGLSL}
+		{'webgl_glsl' : benchmarkWebGlGLSL},
+		{'cheerp_cpp' : benchmarkCheerpCPP}
 	];
 
 	function withPositiveOrNegative(new_time, base_score) {
