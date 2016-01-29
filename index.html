@@ -4,13 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>Faster Browser Code</title>
 		<link type="text/css" href="styles.css" media="screen" rel="Stylesheet" />
-		<script type="text/javascript" src="tests/js_pure/benchmark.js"></script>
-		<script type="text/javascript" src="tests/js_use_strict/benchmark.js"></script>
-		<script type="text/javascript" src="tests/js_bitwise_or_integers/benchmark.js"></script>
-		<script type="text/javascript" src="tests/emscripten_c/benchmark.js"></script>
-		<script type="text/javascript" src="tests/emscripten_c_o3/benchmark.js"></script>
 		<script type="text/javascript" src="tests/webgl_glsl/benchmark.js"></script>
-		<script type="text/javascript" src="tests/cheerp_cpp/benchmark.js"></script>
 	</head>
 	<body>
 		<span id="forkongithub">
@@ -116,15 +110,16 @@
 	</body>
 	<script>
 	var g_benchmarks = [
-		{'js_pure' : benchmarkJSWebWorker},
-		{'js_use_strict' : benchmarkJSWebWorkerUseStrict},
-		{'js_bitwise_or_integers' : benchmarkJSWebWorkerUseOrIntegers},
-		{'emscripten_c' : benchmarkEmscriptenC},
-		{'emscripten_c_o3' : benchmarkEmscriptenCO3},
-		{'webgl_glsl' : benchmarkWebGlGLSL},
-		{'cheerp_cpp' : benchmarkCheerpCPP}
+		{name: 'js_pure', use_worker: true},
+		{name: 'js_use_strict', use_worker: true},
+		{name: 'js_bitwise_or_integers', use_worker: true},
+		{name: 'emscripten_c', use_worker: true},
+		{name: 'emscripten_c_o3', use_worker: true},
+		{name: 'webgl_glsl', use_worker: false, cb: benchmarkWebGlGLSL},
+		{name: 'cheerp_cpp', use_worker: true}
 	];
 
+	// FIXME: rename to getScore
 	function withPositiveOrNegative(new_time, base_score) {
 		var new_time = new_time - base_score;
 		var prefix = '';
@@ -136,42 +131,88 @@
 		return prefix + ((Math.abs(new_time) / Math.abs(base_score)) * 100).toFixed(2) + '%';
 	}
 
+	function runBenchmarkInWorker(worker_path, cb) {
+		console.info(worker_path);
+		var worker = new Worker(worker_path);
+		worker.onmessage = function(e) {
+			console.info(e.data);
+			switch (e.data.action) {
+				case 'end':
+					var start_time = e.data.start_time;
+					var result = e.data.result;
+					var end_time = e.data.end_time;
+					var diff_time = end_time - start_time;
+					cb(diff_time, result);
+					worker.terminate();
+					break;
+			}
+		};
+
+		var message = {
+			action: 'start'
+		};
+		console.info(message);
+		worker.postMessage(message);
+	}
+
 	function startBenchmarks() {
 		var base_score = 0;
+		var i = 0;
+		var time_span = null;
+		// FIXME: rename to score_span
+		var diff_span = null;
 
-		var nextBenchmark = function(i) {
-			if (i >= g_benchmarks.length) {
-				document.querySelector('#start').style.display = '';
-				document.querySelector('#waiting').style.display = 'none';
+		var onStart = function() {
+			document.querySelector('#start').style.display = 'none';
+			document.querySelector('#waiting').style.display = '';
+		};
+
+		var onEnd = function() {
+			document.querySelector('#start').style.display = '';
+			document.querySelector('#waiting').style.display = 'none';
+		};
+
+		var onBenchmarkEnd = function(diff_time, result) {
+			if (i === 0) {
+				base_score = diff_time;
+			}
+			time_span.classList.remove('running');
+			time_span.innerHTML = diff_time;
+			diff_span.innerHTML = withPositiveOrNegative(diff_time, base_score);
+			i++;
+			nextBenchmark();
+		};
+
+		var nextBenchmark = function() {
+			if (i === 0) {
+				onStart();
+			} else if (i >= g_benchmarks.length) {
+				onEnd();
 				return;
 			}
 
-			var bench_element = Object.keys(g_benchmarks[i])[0];
-			var bench_cb = g_benchmarks[i][bench_element];
-			var time_span = document.querySelector('#time_' + bench_element);
-			var diff_span = document.querySelector('#diff_' + bench_element);
+			var bench_name = g_benchmarks[i]['name'];
+			var use_worker = g_benchmarks[i]['use_worker'];
+			time_span = document.querySelector('#time_' + bench_name);
+			diff_span = document.querySelector('#diff_' + bench_name);
 			time_span.classList.add('running');
 			time_span.innerHTML = 'Running ...';
 			diff_span.innerHTML = '';
 
 			setTimeout(function() {
-				bench_cb(function(diff_time, result) {
-					if (i === 0) {
-						base_score = diff_time;
-					}
-					time_span.classList.remove('running');
-					time_span.innerHTML = diff_time;
-					diff_span.innerHTML = withPositiveOrNegative(diff_time, base_score);
-					nextBenchmark(i + 1);
-				});
+				if (use_worker) {
+					var worker_path = 'tests/' + bench_name + '/worker.js';
+					runBenchmarkInWorker(worker_path, onBenchmarkEnd);
+				} else {
+					var cb = g_benchmarks[i]['cb'];
+					cb(onBenchmarkEnd);
+				}
 			}, 100);
 		};
-		nextBenchmark(0);
+		nextBenchmark();
 	}
 
 	document.querySelector('#start').addEventListener('click', function() {
-		document.querySelector('#start').style.display = 'none';
-		document.querySelector('#waiting').style.display = '';
 		startBenchmarks();
 	}, false);
 	</script>
