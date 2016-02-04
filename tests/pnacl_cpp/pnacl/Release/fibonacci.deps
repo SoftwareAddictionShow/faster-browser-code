@@ -1,0 +1,73 @@
+# Updated by fix_deps.py
+pnacl/Release/fibonacci.o: fibonacci.cc \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/cpp/instance.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/c/pp_instance.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/c/pp_macros.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/c/pp_stdint.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/c/pp_resource.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/c/ppb_console.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/c/pp_bool.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/c/pp_var.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/cpp/instance_handle.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/cpp/view.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/cpp/resource.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/cpp/pass_ref.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/cpp/rect.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/c/pp_rect.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/c/pp_point.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/c/pp_size.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/cpp/point.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/cpp/size.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/cpp/logging.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/cpp/module.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/c/pp_module.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/c/ppb.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/c/ppb_core.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/c/pp_completion_callback.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/c/pp_time.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/cpp/core.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/cpp/var.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/utility/completion_callback_factory.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/cpp/completion_callback.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/c/pp_errors.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/cpp/output_traits.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/cpp/array_output.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/c/pp_array_output.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/utility/completion_callback_factory_thread_traits.h \
+  /home/matt/nacl_sdk/pepper_47/include/ppapi/utility/threading/lock.h
+fibonacci.cc:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/cpp/instance.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/c/pp_instance.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/c/pp_macros.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/c/pp_stdint.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/c/pp_resource.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/c/ppb_console.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/c/pp_bool.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/c/pp_var.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/cpp/instance_handle.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/cpp/view.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/cpp/resource.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/cpp/pass_ref.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/cpp/rect.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/c/pp_rect.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/c/pp_point.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/c/pp_size.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/cpp/point.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/cpp/size.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/cpp/logging.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/cpp/module.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/c/pp_module.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/c/ppb.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/c/ppb_core.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/c/pp_completion_callback.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/c/pp_time.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/cpp/core.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/cpp/var.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/utility/completion_callback_factory.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/cpp/completion_callback.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/c/pp_errors.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/cpp/output_traits.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/cpp/array_output.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/c/pp_array_output.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/utility/completion_callback_factory_thread_traits.h:
+/home/matt/nacl_sdk/pepper_47/include/ppapi/utility/threading/lock.h:
