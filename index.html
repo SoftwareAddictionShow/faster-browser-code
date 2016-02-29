@@ -6,7 +6,7 @@
 		<link type="text/css" href="styles.css" media="screen" rel="Stylesheet" />
 		<script type="text/javascript" src="tests/webgl_glsl/benchmark.js"></script>
 		<script type="text/javascript" src="tests/pnacl_cpp/common.js"></script>
-		<script type="text/javascript" src="tests/pnacl_cpp/example.js"></script>
+		<script type="text/javascript" src="tests/pnacl_cpp/benchmark.js"></script>
 	</head>
 	<body data-name="fibonacci" data-tools="pnacl newlib glibc clang-newlib linux" data-configs="Debug Release" data-path="tests/pnacl_cpp/{tc}/{config}">
 		<span id="forkongithub">
@@ -127,7 +127,7 @@
 		{name: 'emscripten_c_o3', use_worker: true},
 		{name: 'webgl_glsl', use_worker: false, cb: benchmarkWebGlGLSL},
 		{name: 'cheerp_cpp', use_worker: true},
-		{name: 'pnacl_cpp', use_worker: false, cb: startTest},
+		{name: 'pnacl_cpp', use_worker: false, cb: benchmarkPNaCl},
 	];
 
 	// FIXME: rename to getScore

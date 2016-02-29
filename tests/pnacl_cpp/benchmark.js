@@ -1,13 +1,10 @@
 
-function attachListeners() {
-	console.info('attachListeners');
-}
 
 var start_time = null;
 var end_time = null;
 var _cb = null;
 
-function startTest(cb) {
+function benchmarkPNaCl(cb) {
   _cb = cb;
   if (common.naclModule) {
     common.updateStatus('Running Test');
