@@ -2,7 +2,6 @@
 
 
 self.addEventListener('message', function(e) {
-	console.info(e.data);
 	var fibonacci = function(n) {
 		"use strict";
 		if (n < 2) {

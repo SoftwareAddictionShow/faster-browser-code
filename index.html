@@ -5,11 +5,16 @@
 		<title>Faster Browser Code</title>
 		<link type="text/css" href="styles.css" media="screen" rel="Stylesheet" />
 		<script type="text/javascript" src="tests/webgl_glsl/benchmark.js"></script>
+		<script type="text/javascript" src="common.js"></script>
+		<script type="text/javascript" src="example.js"></script>
 	</head>
-	<body>
+	<body data-name="fibonacci" data-tools="pnacl newlib glibc clang-newlib linux" data-configs="Debug Release" data-path="{tc}/{config}">
 		<span id="forkongithub">
 			<a href="https://github.com/SoftwareAddictionShow/faster-browser-code">Fork me on GitHub</a>
 		</span>
+
+		<h2>Status: <code id="statusField">NO-STATUS</code></h2>
+		<div id="listener"></div>
 
 		<h1>Faster Browser Code</h1>
 
@@ -79,6 +84,12 @@
 				<td class="result_time"><span id="time_cheerp_cpp"></span></td>
 				<td class="result_time" id="diff_cheerp_cpp"></td>
 			</tr>
+			<tr>
+				<td>PNaCl - C++</td>
+				<td>C++ compiled with PNaCl on default optimized(-O2) settings.</td>
+				<td class="result_time"><span id="time_pnacl_cpp"></span></td>
+				<td class="result_time" id="diff_pnacl_cpp"></td>
+			</tr>
 		</table>
 
 		<h2>TODO:</h2>
@@ -88,6 +99,7 @@
 			<li>ASM.js</li>
 			<li>TypeScript</li>
 			<li>CoffeeScript</li>
+			<li>Swift</li>
 			<li>Hax</li>
 			<li>C# - JSIL</li>
 			<li>Go - gopherjs</li>
@@ -97,7 +109,6 @@
 		<ul>
 			<li>Dart</li>
 			<li>Nacl</li>
-			<li>Pnacl</li>
 		</ul>
 
 		<h2>TODO Future:</h2>
@@ -116,7 +127,8 @@
 		{name: 'emscripten_c', use_worker: true},
 		{name: 'emscripten_c_o3', use_worker: true},
 		{name: 'webgl_glsl', use_worker: false, cb: benchmarkWebGlGLSL},
-		{name: 'cheerp_cpp', use_worker: true}
+		{name: 'cheerp_cpp', use_worker: true},
+		{name: 'pnacl_cpp', use_worker: false, cb: startTest},
 	];
 
 	// FIXME: rename to getScore
@@ -135,7 +147,6 @@
 		console.info(worker_path);
 		var worker = new Worker(worker_path);
 		worker.onmessage = function(e) {
-			console.info(e.data);
 			switch (e.data.action) {
 				case 'end':
 					var start_time = e.data.start_time;
@@ -151,7 +162,6 @@
 		var message = {
 			action: 'start'
 		};
-		console.info(message);
 		worker.postMessage(message);
 	}
 
@@ -177,8 +187,14 @@
 				base_score = diff_time;
 			}
 			time_span.classList.remove('running');
-			time_span.innerHTML = diff_time;
-			diff_span.innerHTML = withPositiveOrNegative(diff_time, base_score);
+
+			if (diff_time !== null) {
+				time_span.innerHTML = diff_time;
+				diff_span.innerHTML = withPositiveOrNegative(diff_time, base_score);
+			} else {
+				time_span.innerHTML = 'Failed';
+				diff_span.innerHTML = 'Failed';
+			}
 			i++;
 			nextBenchmark();
 		};

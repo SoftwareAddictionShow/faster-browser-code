@@ -39,7 +39,7 @@ function benchmarkWebGlGLSL(cb) {
 		var gl = surface.getContext('webgl') || surface.getContext('experimental-webgl');
 		if (! gl) {
 			console.error('Failed to init WebGL');
-			return;
+			return null;
 		}
 
 		// Print the open gl version
@@ -64,6 +64,7 @@ function benchmarkWebGlGLSL(cb) {
 			var lastError = gl.getShaderInfoLog(shaderVertex);
 			console.error("Shader compile error:" + lastError);
 			gl.deleteShader(shaderVertex);
+			return null;
 		}
 
 		// Inject our sizes into the shader source code
@@ -82,6 +83,7 @@ function benchmarkWebGlGLSL(cb) {
 			var lastError = gl.getShaderInfoLog(shaderFragment);
 			console.error("Shader compile error:" + lastError);
 			gl.deleteShader(shaderFragment);
+			return null;
 		}
 
 		// Build the program
@@ -93,6 +95,7 @@ function benchmarkWebGlGLSL(cb) {
 		if (! linked) {
 			var lastError = gl.getProgramInfoLog(program);
 			console.error("Program link error:" + lastError);
+			return null;
 		}
 		gl.useProgram(program);
 
@@ -181,7 +184,11 @@ function benchmarkWebGlGLSL(cb) {
 			var result = main(vshader_src, fshader_src);
 			var end_time = new Date().getTime();
 			console.info(end_time - start_time);
-			cb(end_time - start_time, result);
+			if (result) {
+				cb(end_time - start_time, result);
+			} else {
+				cb(null);
+			}
 		});
 	});
 

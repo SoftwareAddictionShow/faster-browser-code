@@ -2,7 +2,6 @@
 
 
 self.addEventListener('message', function(e) {
-	console.info(e.data);
 	var fibonacci = function(n) {
 		if (n < (2|0)) {
 			return n;
