@@ -187,8 +187,14 @@
 				base_score = diff_time;
 			}
 			time_span.classList.remove('running');
-			time_span.innerHTML = diff_time;
-			diff_span.innerHTML = withPositiveOrNegative(diff_time, base_score);
+
+			if (diff_time !== null) {
+				time_span.innerHTML = diff_time;
+				diff_span.innerHTML = withPositiveOrNegative(diff_time, base_score);
+			} else {
+				time_span.innerHTML = 'Failed';
+				diff_span.innerHTML = 'Failed';
+			}
 			i++;
 			nextBenchmark();
 		};
