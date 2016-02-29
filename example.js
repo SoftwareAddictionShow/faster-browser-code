@@ -13,6 +13,8 @@ function startTest(cb) {
     common.updateStatus('Running Test');
     start_time = new Date().getTime();
     common.naclModule.postMessage(43);
+  } else {
+    _cb(null);
   }
 }
 
