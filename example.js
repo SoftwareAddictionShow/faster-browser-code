@@ -1,19 +1,18 @@
 
 function attachListeners() {
-  document.getElementById('start').addEventListener('click', startTest);
+	console.info('attachListeners');
 }
 
 var start_time = null;
 var end_time = null;
+var _cb = null;
 
-function startTest() {
+function startTest(cb) {
+  _cb = cb;
   if (common.naclModule) {
-    var numberEl = document.querySelector('#number');
-    var number = parseInt(numberEl.value, 10);
-
     common.updateStatus('Running Test');
     start_time = new Date().getTime();
-    common.naclModule.postMessage(number);
+    common.naclModule.postMessage(43);
   }
 }
 
@@ -24,5 +23,5 @@ function handleMessage(message_event) {
 	var d = message_event.data;
 
 	diff_time = end_time - start_time;
-	document.querySelector('#result').innerHTML = diff_time;
+	_cb(diff_time);
 }
